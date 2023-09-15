@@ -1,0 +1,57 @@
+pipeline{
+    agent any
+     tools {
+        maven 'Maven-3.6.1'
+    }
+    
+    environment{
+        PATH = "/opt/maven3/bin:$PATH"
+    }
+    stages{
+        stage("Git Checkout"){
+            steps{
+                git 'https://github.com/aliasgarxo/JenkinsPipeline.git'
+            }
+        }
+        stage("Sonar scan and Maven Build"){
+            steps{
+                sh "mvn clean sonar:sonar package"
+                
+            }
+        }
+        stage('Upload War To Nexus'){
+            steps{
+                  nexusArtifactUploader artifacts: [
+                       [
+                            artifactId: 'myweb', 
+                            classifier: '', 
+                            file: "target/myweb-8.2.0.war", 
+                            type: 'war'
+                       ]
+                  ], 
+                  credentialsId: 'nexus3', 
+                  groupId: 'in.javahome', 
+                  nexusUrl: '13.233.109.157:8081', 
+                  nexusVersion: 'nexus3', 
+                  protocol: 'http', 
+                  repository: 'Arch-Proj', 
+                  version: '8.1.0'  
+              }
+            }
+        stage("deploy-dev-tomcat"){
+            steps{
+                sshagent(['tomcat']) {
+                sh """
+                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@3.109.49.132:/home/ec2-user/apache-tomcat-9.0.80/webapps/
+                    
+                    ssh ec2-user@3.109.49.132 /home/ec2-user/apache-tomcat-9.0.80/bin/shutdown.sh
+                    
+                    ssh ec2-user@3.109.49.132 /home/ec2-user/apache-tomcat-9.0.80/bin/startup.sh
+                
+                """
+                }
+            
+            }
+        }
+    }
+}

@@ -44,12 +44,12 @@
         <distributionManagement>
                  <snapshotRepository>
                     <id>nexusRepo</id>
-                    <url>http://43.204.25.49:8081/repository/sample-snapshot/</url>
+                    <url>http://43.204.25.49:8081/repository/Arch-Proj/</url>
                  </snapshotRepository>
 
                 <repository>
                     <id>nexusRepo</id>
-                    <url>http://43.204.25.49:8081/repository/sample-release/</url>
+                    <url>http://43.204.25.49:8081/repository/Arch-Proj-Snapshots/</url>
                 </repository>
         </distributionManagement>
 

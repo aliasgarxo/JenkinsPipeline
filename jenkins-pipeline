@@ -34,7 +34,7 @@ pipeline{
                   nexusUrl: '43.204.25.49:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
-                  repository: 'sample-release', 
+                  repository: 'Arch-Proj', 
                   version: '8.2.0'  
               }
             }

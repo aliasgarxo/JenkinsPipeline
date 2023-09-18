@@ -4,7 +4,7 @@
         <groupId>in.javahome</groupId>
         <artifactId>myweb</artifactId>
         <packaging>war</packaging>
-        <version>8.1.0</version>
+        <version>8.2.0</version>
         <name>Java Home myweb</name>
         <url>http://maven.apache.org</url>
         <build>
@@ -24,7 +24,7 @@
         </build>
         <properties>
                 <docker.image.prefix>kammana</docker.image.prefix>
-                <sonar.host.url>http://13.233.95.176:9000//</sonar.host.url>
+                <sonar.host.url>http://13.233.95.176:9000/</sonar.host.url>
                 <maven.compiler.source>1.8</maven.compiler.source>
                 <maven.compiler.target>1.8</maven.compiler.target>
 
@@ -44,15 +44,22 @@
         <distributionManagement>
                  <snapshotRepository>
                     <id>nexusRepo</id>
-                    <url>http://43.204.25.49:8081//repository/Arch-Proj/</url>
+                    <url>http://43.204.25.49:8081/repository/sample-snapshot/</url>
                  </snapshotRepository>
 
                 <repository>
                     <id>nexusRepo</id>
-                    <url>http://43.204.25.49:8081//repository/Arch-Proj-Snapshot/</url>
+                    <url>http://43.204.25.49:8081/repository/sample-release/</url>
                 </repository>
         </distributionManagement>
 
+        <pluginRepositories>
+            <pluginRepository>
+                <id>maven1</id>
+                <name>Maven.org</name>
+                <url>http://repo1.maven.org/maven2</url>
+            </pluginRepository>
+        </pluginRepositories>
 
 
 </project>
